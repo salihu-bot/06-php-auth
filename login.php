@@ -17,6 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('login.php');
     }
 
+    $remoteIp = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $ip = is_string($remoteIp) && $remoteIp !== '' ? substr($remoteIp, 0, 45) : 'unknown';
+    $blockedMinutes = login_throttle_minutes($email, $ip);
+
+    if ($blockedMinutes > 0) {
+        flash('error', 'Too many attempts, try again in ' . $blockedMinutes . ' minutes');
+        $_SESSION['_old_input'] = ['email' => $email];
+        redirect('login.php');
+    }
+
     $statement = db()->prepare(
         'SELECT id, name, email, password_hash, role FROM users WHERE email = :email LIMIT 1'
     );
@@ -24,9 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $statement->fetch();
     $dummyPasswordHash = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
     $passwordHash = is_array($user) ? $user['password_hash'] : $dummyPasswordHash;
-    $passwordIsValid = is_string($passwordHash) && password_verify($password, $passwordHash);
+    $passwordMatches = is_string($passwordHash) && password_verify($password, $passwordHash);
+    $passwordIsValid = $passwordMatches && strlen($password) <= 72;
 
     if (!is_array($user) || !$passwordIsValid) {
+        record_failed_login($email, $ip);
+        $blockedMinutes = login_throttle_minutes($email, $ip);
+        if ($blockedMinutes > 0) {
+            flash('error', 'Too many attempts, try again in ' . $blockedMinutes . ' minutes');
+            $_SESSION['_old_input'] = ['email' => $email];
+            redirect('login.php');
+        }
+
         flash('error', 'Invalid email or password');
         $_SESSION['_old_input'] = ['email' => $email];
         redirect('login.php');
@@ -47,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $updateLastLogin = db()->prepare('UPDATE users SET last_login_at = CURRENT_TIMESTAMP WHERE id = :id');
     $updateLastLogin->execute(['id' => (int) $user['id']]);
+    clear_login_attempts($email, $ip);
 
     session_regenerate_id(true);
     unset($_SESSION['_csrf_token'], $_SESSION['_old_input']);

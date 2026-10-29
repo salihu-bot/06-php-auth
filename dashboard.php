@@ -32,6 +32,7 @@ $lastLogin = $account['last_login_at'] === null
     <link rel="stylesheet" href="assets/auth.css">
 </head>
 <body>
+<?= navbar() ?>
 <main class="auth-page">
     <section class="auth-card" aria-labelledby="page-title">
         <p class="eyebrow">SWD Auth</p>
@@ -46,10 +47,6 @@ $lastLogin = $account['last_login_at'] === null
             <div><dt>Last login</dt><dd><?= e($lastLogin) ?></dd></div>
         </dl>
 
-        <form class="logout-form" method="post" action="logout.php">
-            <?= csrf_field() ?>
-            <button type="submit">Sign out</button>
-        </form>
     </section>
 </main>
 </body>

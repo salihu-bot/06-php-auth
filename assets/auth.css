@@ -186,8 +186,129 @@ button:focus-visible {
     margin-top: 20px;
 }
 
+.site-nav {
+    display: flex;
+    min-height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px max(20px, calc((100% - 1120px) / 2));
+    border-bottom: 1px solid #e4e9f2;
+    background: #fff;
+}
+
+.brand {
+    color: #172033;
+    font-weight: 750;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #3158c9;
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.nav-links form {
+    display: block;
+}
+
+.nav-links button {
+    min-height: 38px;
+    margin: 0;
+    padding: 0 14px;
+}
+
+.site-nav + .auth-page {
+    min-height: calc(100vh - 64px);
+}
+
+.admin-card {
+    width: min(100%, 1120px);
+}
+
+.admin-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.users-table th,
+.users-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e8ecf3;
+    vertical-align: middle;
+}
+
+.users-table th {
+    color: #657087;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+.users-table td form {
+    display: flex;
+    min-width: 190px;
+    align-items: center;
+    gap: 8px;
+}
+
+.users-table select {
+    min-height: 38px;
+    padding: 6px 8px;
+    border: 1px solid #cbd3e1;
+    border-radius: 7px;
+    background: #fff;
+    color: inherit;
+    font: inherit;
+}
+
+.users-table button {
+    min-height: 38px;
+    margin: 0;
+    padding: 0 12px;
+}
+
 @media (max-width: 480px) {
     .auth-card {
         padding: 28px 22px;
+    }
+
+    .site-nav {
+        padding: 10px 16px;
+    }
+
+    .nav-links {
+        gap: 12px;
     }
 }
