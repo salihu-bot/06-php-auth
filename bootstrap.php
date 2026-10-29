@@ -9,6 +9,7 @@ require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/src/db.php';
 require_once __DIR__ . '/src/helpers.php';
 require_once __DIR__ . '/src/csrf.php';
+require_once __DIR__ . '/src/auth.php';
 
 ini_set('session.use_strict_mode', '1');
 ini_set('session.use_only_cookies', '1');
@@ -25,3 +26,15 @@ session_set_cookie_params([
     'samesite' => 'Lax',
 ]);
 session_start();
+
+$now = time();
+if (isset($_SESSION['user']['id'])) {
+    $lastActivity = $_SESSION['_last_activity'] ?? null;
+
+    if (!is_int($lastActivity) || $now - $lastActivity >= 1800) {
+        $_SESSION = [];
+        session_regenerate_id(true);
+        flash('status', 'Your session expired after 30 minutes of inactivity. Please sign in again.');
+    }
+}
+$_SESSION['_last_activity'] = $now;

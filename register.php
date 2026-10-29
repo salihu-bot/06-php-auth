@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/bootstrap.php';
 
-if (isset($_SESSION['user']['id'])) {
-    redirect('dashboard.php');
-}
+require_guest();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'] ?? '';
@@ -65,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             try {
                 $insertUser = $connection->prepare(
-                    'INSERT INTO users (name, email, password_hash) VALUES (:name, :email, :password_hash)'
+                    'INSERT INTO users (name, email, password_hash, last_login_at) VALUES (:name, :email, :password_hash, CURRENT_TIMESTAMP)'
                 );
                 $insertUser->execute([
                     'name' => $name,
@@ -84,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 session_regenerate_id(true);
                 $_SESSION['user'] = [
                     'id' => (int) $connection->lastInsertId(),
+                    'role' => 'user',
                     'name' => $name,
                     'email' => $email,
                 ];

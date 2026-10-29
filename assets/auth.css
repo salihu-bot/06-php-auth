@@ -133,6 +133,59 @@ button:focus-visible {
     line-height: 1.5;
 }
 
+.success-box {
+    margin: 0 0 20px;
+    padding: 14px 16px;
+    border: 1px solid #a8d9bd;
+    border-radius: 8px;
+    background: #f0fbf4;
+    color: #21613b;
+    font-size: 0.9rem;
+}
+
+.auth-links {
+    margin: 22px 0 0;
+    color: #657087;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.auth-links a {
+    color: #3158c9;
+    font-weight: 650;
+}
+
+.account-details {
+    display: grid;
+    gap: 0;
+    margin: 0 0 22px;
+}
+
+.account-details div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e8ecf3;
+}
+
+.account-details dt {
+    color: #657087;
+    font-size: 0.9rem;
+}
+
+.account-details dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: right;
+}
+
+.logout-form {
+    margin-top: 20px;
+}
+
 @media (max-width: 480px) {
     .auth-card {
         padding: 28px 22px;
