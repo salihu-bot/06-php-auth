@@ -1,0 +1,140 @@
+:root {
+    color-scheme: light;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    color: #172033;
+    background: #f3f6fb;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.auth-page {
+    display: grid;
+    min-height: 100vh;
+    padding: 32px 16px;
+    place-items: center;
+    background:
+        radial-gradient(circle at 15% 15%, rgb(219 234 254 / 75%), transparent 32rem),
+        #f3f6fb;
+}
+
+.auth-card {
+    width: min(100%, 440px);
+    padding: 40px;
+    border: 1px solid #e4e9f2;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgb(23 32 51 / 10%);
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+    color: #3158c9;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(1.75rem, 5vw, 2rem);
+    letter-spacing: -0.04em;
+}
+
+.intro {
+    margin: 12px 0 28px;
+    color: #657087;
+    line-height: 1.55;
+}
+
+form {
+    display: grid;
+    gap: 10px;
+}
+
+label {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    font-weight: 650;
+}
+
+input {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 12px;
+    border: 1px solid #cbd3e1;
+    border-radius: 8px;
+    background: #fff;
+    color: inherit;
+    font: inherit;
+}
+
+input:focus {
+    border-color: #3158c9;
+    outline: 3px solid rgb(49 88 201 / 16%);
+}
+
+.field-hint {
+    margin: -4px 0 4px;
+    color: #657087;
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+button {
+    min-height: 48px;
+    margin-top: 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #3158c9;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+}
+
+button:hover {
+    background: #2548ae;
+}
+
+button:focus-visible {
+    outline: 3px solid #9db5ff;
+    outline-offset: 3px;
+}
+
+.error-box {
+    margin: 0 0 20px;
+    padding: 14px 16px;
+    border: 1px solid #f1b8bd;
+    border-radius: 8px;
+    background: #fff5f5;
+    color: #8d2630;
+    font-size: 0.9rem;
+}
+
+.error-box p {
+    margin: 0 0 6px;
+    font-weight: 700;
+}
+
+.error-box ul {
+    margin: 0;
+    padding-left: 20px;
+    line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 28px 22px;
+    }
+}
