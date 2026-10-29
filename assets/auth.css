@@ -51,6 +51,17 @@ h1 {
     letter-spacing: -0.04em;
 }
 
+h2 {
+    margin: 24px 0 12px;
+    font-size: 1.05rem;
+}
+
+.section-heading {
+    margin-top: 34px;
+    padding-top: 24px;
+    border-top: 1px solid #e8ecf3;
+}
+
 .intro {
     margin: 12px 0 28px;
     color: #657087;

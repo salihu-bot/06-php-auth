@@ -85,6 +85,8 @@ function navbar(): string
 
     $html = '<nav class="site-nav" aria-label="Main navigation"><a class="brand" href="' . e(app_url('dashboard.php')) . '">SWD Auth</a><div class="nav-links">';
 
+    $html .= '<a href="' . e(app_url('profile.php')) . '">Profile</a>';
+
     if (current_user_role() === 'admin') {
         $html .= '<a href="' . e(app_url('admin/users.php')) . '">Admin</a>';
     }
